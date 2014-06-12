@@ -1,0 +1,25 @@
+
+
+StopWatch  task prints the time taken by a target.
+
+
+This is how we define 
+
+
+<target name="TARGET_NAME" description="DESCRIPTION" >	
+	<stopwatch name="STOPWATCH_NAME"/>			
+	
+	<!--
+
+	ACTUAL LOGIC OF THE TASK 
+
+	-->
+		
+	<stopwatch name="STOPWATCH_NAME" action="total" />
+</target>
+
+
+The output will be like the following
+
+  [echo] TASK=TASK_NAME  TIME=45.862 sec
+  [echo] TASK=RUN TASK_NAME  TIME=27:33.660 sec
