@@ -1,0 +1,58 @@
+
+
+<!-- CLOVER REPORT DIRECTORY -->
+
+<property name="clover-report" value="directory_name"/>
+
+
+<!-- CLOVER LIB LOCATION -->
+
+<property name="clover.jar" location="lib/clover/clover.jar"/>
+<taskdef resource="cloverlib.xml" classpath="${clover.jar}"/>
+
+
+<!-- TASK TO SETUP CLOVER FOR INSTRUMENTATION -->
+<target name="clover-setup">
+	<clover-setup initstring="./clover-db/fxi_clover_db.db" />
+</target>
+	
+
+<!-- GENERATE CLOVER REPORT FOR INDIVIDUAL FOLDERS -->
+	
+<target name="clover-xml-report">		
+	 <ant dir="DIRECTORY_1" target="clover-xml-report" antfile="ci.xml" />	 
+	 <ant dir="DIRECTORY_2" target="clover-xml-report" antfile="ci.xml" />	 
+	 <ant dir="DIRECTORY_3" target="clover-xml-report" antfile="ci.xml" />	 
+</target>
+
+<!-- CLOVER MERGE DB's -->
+
+<target name="clover-merge-dbs">
+	<clover-merge initString="./clover_merge_db/clover_merged_db.db">
+		<cloverDb initString="./clover-db/fxi_clover_db.db"/>
+		<cloverDb initString="./DIRECTORY_1/clover-db/clover_db.db"/>
+		<cloverDb initString="./DIRECTORY_2/clover-db/clover_db.db"/>	
+	</clover-merge>
+</target>
+
+<!-- CLOVER GENERATE CLOVER REPORT IN xml FORMAT -->
+	
+<target name="clover-merged-db-xml-report">
+	<clover-report initstring="./clover_merge_db/clover_merged_db.db">
+		<current  outfile="${clover-report}/xml/coverage.xml">
+			<format type="xml"/>
+		</current>
+	</clover-report> 	
+</target>
+	 
+
+<!-- CLOVER GENERATE CLOVER REPORT IN html FORMAT -->	 
+	
+<target name="clover-merged-db-html-report">		
+	<clover-report initstring="./clover_merge_db/clover_merged_db.db">
+		<current outfile="${clover-report}/html" title="Code Coverage" summary="true">
+			<format type="html"/>
+		</current>
+	</clover-report>		
+</target>
+	
